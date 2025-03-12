@@ -64,3 +64,12 @@ SELECT SNOWFLAKE.CORTEX.COMPLETE('snowflake-arctic', 'What are top 2 free public
 ------------------------------------------------------------
 
 SELECT SNOWFLAKE.CORTEX.EMBED_TEXT_768('snowflake-arctic-embed-m-v1.5', 'What are top 2 free public email services?');
+
+---------------------------------------------------------------------------
+--- EXAMPLE: CHECK STATUS of finetuning model. You need the Job ID
+---------------------------------------------------------------------------
+
+SELECT SNOWFLAKE.CORTEX.FINETUNE(
+  'DESCRIBE',
+  'ft_e7c079be-f011-4075-8f1f-f8e6c41375e7'
+)
