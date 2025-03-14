@@ -58,12 +58,23 @@ $$,
 
 SELECT SNOWFLAKE.CORTEX.COMPLETE('snowflake-arctic', 'What are top 2 free public email services?');
 
-
 ------------------------------------------------------------
 --- EXAMPLE: VECTOR EMBEDDING
 ------------------------------------------------------------
 
 SELECT SNOWFLAKE.CORTEX.EMBED_TEXT_768('snowflake-arctic-embed-m-v1.5', 'What are top 2 free public email services?');
+
+---------------------------------------------------------------------------
+--- EXAMPLE: Finetune a base model
+---------------------------------------------------------------------------
+
+select snowflake.cortex.finetune(
+	'CREATE' , 
+	'RESEARCH.AAGARWAL.<new_model_name>' , 
+	'mistral-7b' , 
+	'SELECT PROMPT as PROMPT, MISTRAL_LARGE_RESPONSE as COMPLETION FROM "RESEARCH"."AAGARWAL"."SUPPORT_TICKETS_TRAIN"' , 
+	'SELECT PROMPT as PROMPT, MISTRAL_LARGE_RESPONSE as COMPLETION FROM "RESEARCH"."AAGARWAL"."SUPPORT_TICKETS_EVAL"' 
+)
 
 ---------------------------------------------------------------------------
 --- EXAMPLE: CHECK STATUS of finetuning model. You need the Job ID
@@ -73,3 +84,10 @@ SELECT SNOWFLAKE.CORTEX.FINETUNE(
   'DESCRIBE',
   'ft_e7c079be-f011-4075-8f1f-f8e6c41375e7'
 )
+
+
+
+
+
+
+
