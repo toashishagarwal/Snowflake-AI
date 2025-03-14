@@ -13,5 +13,18 @@ SELECT * FROM information_schema.databases;
 --------------------------------------------------------------
 select system$clustering_information('ORDERS','(o_orderdate)');
 
-
+--------------------------------------------------------------
+-- Create DYNAMIC table
+--------------------------------------------------------------
+create dynamic table dt_sales_aggregate
+target_lag   = "1 day"
+warehouse    = sales_wh
+refresh_mode = full
+as
+select s.sale_date,
+       st.region
+       sum(s.amount)
+from sales s
+join stores st
+on   s.store_id = st.store_id;
 
