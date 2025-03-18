@@ -28,3 +28,12 @@ from sales s
 join stores st
 on   s.store_id = st.store_id;
 
+-------------------------------------------------------------------
+-- Add a file (models.zip) from local dir to STAGE-model_stage
+-------------------------------------------------------------------
+PUT file:///Users/aagarwal/Downloads/models.zip @model_stage AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
+
+-------------------------------------------------------------------
+-- List the files in STAGE-model_stage
+-------------------------------------------------------------------
+LIST @RESEARCH.AAGARWAL.model_stage
