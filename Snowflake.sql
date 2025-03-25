@@ -37,3 +37,8 @@ PUT file:///Users/aagarwal/Downloads/models.zip @model_stage AUTO_COMPRESS=FALSE
 -- List the files in STAGE-model_stage
 -------------------------------------------------------------------
 LIST @RESEARCH.AAGARWAL.model_stage
+
+-------------------------------------------------------------------
+-- Check the currently Active behaviour change bundles
+-------------------------------------------------------------------
+SELECT SYSTEM$SHOW_ACTIVE_BEHAVIOR_CHANGE_BUNDLES();
