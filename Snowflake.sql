@@ -42,3 +42,16 @@ LIST @RESEARCH.AAGARWAL.model_stage
 -- Check the currently Active behaviour change bundles
 -------------------------------------------------------------------
 SELECT SYSTEM$SHOW_ACTIVE_BEHAVIOR_CHANGE_BUNDLES();
+
+-------------------------------------------------------------------
+-- Create a new COMPUTE pool of GPUs for AI projects
+-------------------------------------------------------------------
+CREATE COMPUTE POOL tutorial_compute_pool
+  MIN_NODES = 1
+  MAX_NODES = 2
+  INSTANCE_FAMILY = GPU_NV_S;
+
+
+
+
+
