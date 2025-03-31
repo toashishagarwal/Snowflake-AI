@@ -51,6 +51,10 @@ CREATE COMPUTE POOL tutorial_compute_pool
   MAX_NODES = 2
   INSTANCE_FAMILY = GPU_NV_S;
 
+-------------------------------------------------------------------
+-- Example of a HASH function
+-------------------------------------------------------------------
+SELECT MD5('Snowflake'), SHA2('Snowflake', 256);
 
 
 
