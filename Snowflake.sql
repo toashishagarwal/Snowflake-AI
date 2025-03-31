@@ -56,6 +56,8 @@ CREATE COMPUTE POOL tutorial_compute_pool
 -------------------------------------------------------------------
 SELECT MD5('Snowflake'), SHA2('Snowflake', 256);
 
-
-
+-----------------------------------------------------------------------------------------
+-- Example of a HASH_AGG function (Used on entire table to check data consistency)
+-----------------------------------------------------------------------------------------
+SELECT HASH_AGG(*) FROM mytable;
 
