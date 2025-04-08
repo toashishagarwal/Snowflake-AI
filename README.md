@@ -12,6 +12,7 @@ Setup Instructions: <br>
 1. Create demo_sm.yaml file from the Snowsight UI (AI & ML > Cortex Analyst > Try > Create new). Select the tables & columns you want to have queries run on
 2. The above step will also ask you to store the generated yaml file in a stage location. This stage location is used in the python code
 <br><br>
+
 Run Instructions: <br>
 1. python -m venv streamlit-env
 2. source streamlit-env/bin/activate
