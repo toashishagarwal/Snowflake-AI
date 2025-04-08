@@ -15,7 +15,7 @@ WAREHOUSE = "demo_wh"
 HOST = "<YOUR_HOSTNAME>"
 ACCOUNT = "<YOUR_ACCOUNT>"
 USER = "<YOUR_USER>"
-PASSWORD = "<YOUR_PASSWORD"
+PASSWORD = "<YOUR_PASSWORD>"
 ROLE = "<YOUR_ROLE>"
 
 if 'CONN' not in st.session_state or st.session_state.CONN is None:
