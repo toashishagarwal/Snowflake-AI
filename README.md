@@ -6,5 +6,14 @@ You may upload your own LLM models in Snowflake stage. In my case, there was a m
 After this, you need to unzip the file in Snowflake notebook's working directory. Then you can use the pytorch_model.bin in your training code
 
 # 2. Text2SQL AI chatbot 
-Technologies: Snowflake Cortex, Python, Streamlit
-Text2SQL chatbot takes plain text english query, transforms that into a snowflake-compatible SQL & returns results
+Technologies: Snowflake Cortex, Python, Streamlit <br>
+Text2SQL chatbot takes plain text english query, transforms that into a snowflake-compatible SQL & returns results <br>
+Setup Instructions: <br>
+1. Create demo_sm.yaml file from the Snowsight UI (AI & ML > Cortex Analyst > Try > Create new). Select the tables & columns you want to have queries run on
+2. The above step will also ask you to store the generated yaml file in a stage location. This stage location is used in the python code
+<br><br>
+Run Instructions: <br>
+1. python -m venv streamlit-env
+2. source streamlit-env/bin/activate
+3. pip install -r requirements.txt
+4. streamlit run analyst_demo.py
