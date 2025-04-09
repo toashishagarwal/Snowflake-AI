@@ -1,8 +1,6 @@
-
 ------------------------------------------------------------
 --- EXAMPLE: CLASSIFICATION FUNCTION
 ------------------------------------------------------------
-
 create or replace temp table t as
 select * from values
 (‘212–555–1212’), (‘Denver’), (‘123 Main St.’) t(thing);
@@ -12,11 +10,9 @@ thing,
 snowflake.cortex.CLASSIFY_TEXT(thing, [‘address’,’phone’,’city’])
 from t;
 
-
 ------------------------------------------------------------
 --- EXAMPLE: SENTIMENT ANALYSIS
 ------------------------------------------------------------
-
 create or replace temp table t as
 select * from values
 (‘I hate this movie’), (‘The weather is gloomy today’), (‘What a relief’) t(thing);
@@ -26,7 +22,6 @@ select thing, snowflake.cortex.SENTIMENT(thing) from t;
 ------------------------------------------------------------
 --- EXAMPLE: TRANSLATE FUNCTION
 ------------------------------------------------------------
-
 SELECT
 SNOWFLAKE.CORTEX.TRANSLATE(
 $$
@@ -43,7 +38,6 @@ $$,
 ------------------------------------------------------------
 --- EXAMPLE: EXTRACT ANSWER
 ------------------------------------------------------------
-
 SELECT
 SNOWFLAKE.CORTEX.EXTRACT_ANSWER(
 $$
@@ -55,19 +49,27 @@ $$,
 ------------------------------------------------------------
 --- EXAMPLE: COMPLETE FUNCTION
 ------------------------------------------------------------
-
 SELECT SNOWFLAKE.CORTEX.COMPLETE('snowflake-arctic', 'What are top 2 free public email services?');
+
+-----------------------------------------------------------------------------
+--- EXAMPLE: COMPLETE FUNCTION (with context history)
+-----------------------------------------------------------------------------
+SELECT SNOWFLAKE.CORTEX.COMPLETE(
+    'snowflake-arctic', 
+    [
+        {'role': 'system', 'content': 'You are a helpful AI assistant. Analyse the top 3 public email providers on the basis of popularity' },
+        {'role': 'user', 'content': 'and on the basis of free storage?'},
+        {'role': 'user', 'content': 'who owns Yahoo Mail'}
+    ], {}) as response;
 
 ------------------------------------------------------------
 --- EXAMPLE: VECTOR EMBEDDING
 ------------------------------------------------------------
-
 SELECT SNOWFLAKE.CORTEX.EMBED_TEXT_768('snowflake-arctic-embed-m-v1.5', 'What are top 2 free public email services?');
 
 ---------------------------------------------------------------------------
 --- EXAMPLE: Finetune a base model
 ---------------------------------------------------------------------------
-
 select snowflake.cortex.finetune(
 	'CREATE' , 
 	'RESEARCH.AAGARWAL.<new_model_name>' , 
@@ -79,11 +81,19 @@ select snowflake.cortex.finetune(
 ---------------------------------------------------------------------------
 --- EXAMPLE: CHECK STATUS of finetuning model. You need the Job ID
 ---------------------------------------------------------------------------
-
 SELECT SNOWFLAKE.CORTEX.FINETUNE(
   'DESCRIBE',
   'ft_e7c079be-f011-4075-8f1f-f8e6c41375e7'
 )
+
+-----------------------------------------------------------------------------------------
+-- EXAMPLE: PARSE_DOCUMENT + COMPLETE example
+-- A pdf document 'HRPolicy.pdf' is uploaded to snowflake stage called 'DOCUMENTS'
+-----------------------------------------------------------------------------------------
+SELECT SNOWFLAKE.CORTEX.PARSE_DOCUMENT(@DOCUMENTS, 'HRPolicy.pdf') as HRPolicy_doc;
+
+SELECT SNOWFLAKE.CORTEX.COMPLETE('claude-3-5-sonnet', CONCAT('What are the different types of leaves employee can avail?', TO_VARCHAR('HRPolicy_doc')));
+
 
 
 
