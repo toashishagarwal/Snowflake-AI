@@ -39,6 +39,11 @@ PUT file:///Users/aagarwal/Downloads/models.zip @model_stage AUTO_COMPRESS=FALSE
 LIST @RESEARCH.AAGARWAL.model_stage
 
 -------------------------------------------------------------------
+-- Show all the stages
+-------------------------------------------------------------------
+SHOW stages;
+       
+-------------------------------------------------------------------
 -- Check the currently Active behaviour change bundles
 -------------------------------------------------------------------
 SELECT SYSTEM$SHOW_ACTIVE_BEHAVIOR_CHANGE_BUNDLES();
@@ -60,4 +65,6 @@ SELECT MD5('Snowflake'), SHA2('Snowflake', 256);
 -- Example of a HASH_AGG function (Used on entire table to check data consistency)
 -----------------------------------------------------------------------------------------
 SELECT HASH_AGG(*) FROM mytable;
+
+
 
