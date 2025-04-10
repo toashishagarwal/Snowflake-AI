@@ -147,7 +147,7 @@ def display_content(
                     else:
                         st.dataframe(df)
 
-st.title("****Text2SQL Chatbot****")
+st.title("CHATTY : Your friendly Text2SQL Chatbot (powered by AI)")
 st.markdown(f"Semantic Model: `{FILE}`")
 
 if "messages" not in st.session_state:
