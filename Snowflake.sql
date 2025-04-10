@@ -66,5 +66,16 @@ SELECT MD5('Snowflake'), SHA2('Snowflake', 256);
 -----------------------------------------------------------------------------------------
 SELECT HASH_AGG(*) FROM mytable;
 
+-----------------------------------------------------------------------------------------
+-- Examples of Array transformations
+-----------------------------------------------------------------------------------------
+select **[1,2,3]; -- Gives 1,2,3 as columns
+
+select greatest(**[11,2,3, 6]);  -- Gives the greatest element. 11 in this case
+select coalesce(**[null,1,2,3]); -- 1 Returns the first non-NULL expression among its arguments, or NULL if all its arguments are NULL
+
+select [**[1,2,3], **[4,5]]; -- Gives [1,2,3,4,5] combines the 2 arrays
+select 1 col1 where col1 in (**[1,2,3], **[4,5]); -- Expand and combine arrays in where clauses. Gives 1 in this case
+
 
 
