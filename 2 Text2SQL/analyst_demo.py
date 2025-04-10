@@ -29,13 +29,52 @@ if 'CONN' not in st.session_state or st.session_state.CONN is None:
         role=ROLE,
     )
 
+# Configuration constants
+if 'CONFIG' not in st.session_state:
+    st.session_state.CONFIG = {
+        'MAX_HISTORY': 5  # Default number of conversation turns to include in context
+    }
+
 def send_message(prompt: str) -> Dict[str, Any]:
     """Calls the REST API and returns the response."""
     request_body = {
         "messages": [{"role": "user", "content": [{"type": "text", "text": prompt}]}],
         "semantic_model_file": f"@{DATABASE}.{SCHEMA}.{STAGE}/{FILE}",
     }
-    print("Inside send_message 1-->")
+   
+    # Add context parameter if there's conversation history
+    if len(st.session_state.messages) > 0:
+        # Create a context string from previous interactions
+        context = ""
+        # Calculate how many conversation turns to include (each turn is a user+assistant pair)
+        max_turns = st.session_state.CONFIG['MAX_HISTORY']
+        
+        # Calculate the starting index to get only the last N turns
+        # Each turn has 2 messages (user + assistant)
+        start_idx = max(0, len(st.session_state.messages) - (max_turns * 2))
+        
+        # Get the relevant conversation history
+        history_messages = st.session_state.messages[start_idx:]
+        
+        # Build the context string from the history
+        for i in range(0, len(history_messages), 2):
+            if i < len(history_messages):
+                user_msg = history_messages[i]
+                if user_msg["role"] == "user" and user_msg["content"]:
+                    context += f"User: {user_msg['content'][0]['text']}\n"
+            
+            if i + 1 < len(history_messages):
+                assistant_msg = history_messages[i + 1]
+                if assistant_msg["role"] == "assistant":
+                    for content_item in assistant_msg["content"]:
+                        if content_item["type"] == "text":
+                            context += f"Assistant: {content_item['text']}\n"
+        
+        # Add context to the request if available
+        if context:
+            enhanced_prompt = f"Previous conversation:\n{context}\n\nCurrent question: {prompt}\n\nPlease answer the current question taking into account the previous conversation context."
+            request_body["messages"][0]["content"][0]["text"] = enhanced_prompt
+    
     resp = requests.post(
         url=f"https://{HOST}/api/v2/cortex/analyst/message",
         json=request_body,
@@ -108,7 +147,7 @@ def display_content(
                     else:
                         st.dataframe(df)
 
-st.title("Cortex Analyst")
+st.title("****Text2SQL Chatbot****")
 st.markdown(f"Semantic Model: `{FILE}`")
 
 if "messages" not in st.session_state:
