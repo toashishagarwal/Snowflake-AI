@@ -1,0 +1,10 @@
+openai
+snowflake-connector-python
+Pillow
+pandas
+requests
+pydantic
+urllib3
+streamlit
+snowflake-sqlalchemy
+snowflake-snowpark-python==1.30.0
