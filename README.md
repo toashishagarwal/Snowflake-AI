@@ -26,3 +26,6 @@ Text2SQL chatbot takes plain text english query, transforms that into a snowflak
 2. source streamlit-env/bin/activate
 3. pip install -r requirements.txt
 4. streamlit run analyst_demo.py
+
+**Chatty App** <br>
+![Alt text](images/chatty.gif)
