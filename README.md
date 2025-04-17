@@ -29,3 +29,8 @@ Text2SQL chatbot takes plain text english query, transforms that into a snowflak
 
 **Chatty App** <br>
 ![Alt text](images/chatty.gif)
+
+# 3. Finetune LLM example
+This notebook demonstrates the finetuning of 'mistral-7b' LLM model on a synthentically generated IT support tickets data. The idea is to match the results obtained on the classification of the tickets via the expensive 'mistral-large' model. The finetuned model is then used to re-classify the IT tickets albeit this time with matching performance with low cost.
+
+
