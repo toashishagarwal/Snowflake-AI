@@ -77,5 +77,9 @@ select coalesce(**[null,1,2,3]); -- 1 Returns the first non-NULL expression amon
 select [**[1,2,3], **[4,5]]; -- Gives [1,2,3,4,5] combines the 2 arrays
 select 1 col1 where col1 in (**[1,2,3], **[4,5]); -- Expand and combine arrays in where clauses. Gives 1 in this case
 
-
-
+---------------------------------------------------------------------------------------------------------
+-- Example of HLL function - Get an approximate count of distinct values
+---------------------------------------------------------------------------------------------------------
+SELECT HLL(email) from customers;        -- Takes 4x-5x less time but does not give exact cardinality
+-- vs
+SELECT COUNT(DISTINCT email) from customers; 
