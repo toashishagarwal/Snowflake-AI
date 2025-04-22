@@ -83,3 +83,13 @@ select 1 col1 where col1 in (**[1,2,3], **[4,5]); -- Expand and combine arrays i
 SELECT HLL(email) from customers;        -- Takes 4x-5x less time but does not give exact cardinality
 -- vs
 SELECT COUNT(DISTINCT email) from customers; 
+
+---------------------------------------------------------------------------------------------------------
+-- Example of Alternative ways to query table without SELECT
+---------------------------------------------------------------------------------------------------------
+Table pune_customers;
+
+Table pune_customers limit 2;
+
+Table pune_customers BEFORE(OFFSET => -30)  -- Time travel queries
+
