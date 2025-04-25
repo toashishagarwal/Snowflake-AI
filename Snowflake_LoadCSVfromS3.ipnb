@@ -1,0 +1,76 @@
+{
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Streamlit Notebook",
+   "name": "streamlit"
+  },
+  "lastEditStatus": {
+   "notebookId": "db2nyxjlytqgr2n2nw23",
+   "authorId": "2998447895159",
+   "authorName": "AAGARWAL",
+   "authorEmail": "aagarwal@guidepoint.com",
+   "sessionId": "174ea7d4-2dee-485e-90c5-4bc4b0b141a4",
+   "lastEditTime": 1745479169548
+  }
+ },
+ "nbformat_minor": 5,
+ "nbformat": 4,
+ "cells": [
+  {
+   "cell_type": "code",
+   "id": "a3c59336-909f-4b14-bae5-e082b230b9bb",
+   "metadata": {
+    "language": "sql",
+    "name": "cell1",
+    "codeCollapsed": false
+   },
+   "outputs": [],
+   "source": "use database Research;\nuse schema aagarwal;\n\n-- Creates an External stage (S3 in this case)\nCREATE STAGE IF NOT EXISTS TASTYBYTE_STAGE \n\tURL = 's3://sfquickstarts/frostbyte_tastybytes/';\n\n-- List the contents of the stage\nLS @TASTYBYTE_STAGE/app/app_orders;\n\n",
+   "execution_count": null
+  },
+  {
+   "cell_type": "code",
+   "id": "87c2b4e0-9057-4d86-8cbc-b1862cf9b31a",
+   "metadata": {
+    "language": "python",
+    "name": "cell2"
+   },
+   "outputs": [],
+   "source": "from snowflake.snowpark.context import get_active_session\nsession = get_active_session()\n\n# We can use Snowpark DataFrameReader to read in the CSV file\n# Create a DataFrame that is configured to load data from the CSV file.\ndf = session.read.options({\"infer_schema\":True}).csv('@TASTYBYTE_STAGE/app/app_orders/app_order_detail.csv.gz')\n\n# print df\ndf\n",
+   "execution_count": null
+  },
+  {
+   "cell_type": "code",
+   "id": "ea6df3cd-2b1d-4d95-944c-d52c055bf92f",
+   "metadata": {
+    "language": "python",
+    "name": "cell3"
+   },
+   "outputs": [],
+   "source": "df.describe()",
+   "execution_count": null
+  },
+  {
+   "cell_type": "code",
+   "id": "f2a654d7-0d24-4c01-aae6-499809f82934",
+   "metadata": {
+    "language": "python",
+    "name": "cell4"
+   },
+   "outputs": [],
+   "source": "# We can create a new table APP_ORDER from this dataframe & query it\ndf.write.mode('overwrite').save_as_table(\"APP_ORDER\")",
+   "execution_count": null
+  },
+  {
+   "cell_type": "code",
+   "id": "f8d0b940-8314-4b6c-87ef-2dd751aef6fb",
+   "metadata": {
+    "language": "sql",
+    "name": "cell5"
+   },
+   "outputs": [],
+   "source": "select * from APP_ORDER;",
+   "execution_count": null
+  }
+ ]
+}
