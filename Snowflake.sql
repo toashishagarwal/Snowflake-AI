@@ -124,3 +124,16 @@ insert into st values('apple','small apple');
 table st;
 
 select s,t, editdistance(s, t) from st;
+
+-----------------------------------------------------------------------
+-- Examples of FULL TEXT SEARCH 
+------------------------------------------------------------------------
+
+SELECT SEARCH('king','KING');  -- TRUE
+SELECT SEARCH('5.1.33','32');  -- FALSE, since 32 is not there in param 1
+
+SELECT SEARCH('King of Kalinga was Samrat Ashok','King and Queen'); -- TRUE, since one of 2nd param values is there in param 1. It defaults to OR
+
+SELECT SEARCH('King of Kalinga was Samrat Ashok','King and Queen',SEARCH_MODE => 'AND'); -- FALSE, since we now forced to search using AND
+
+
