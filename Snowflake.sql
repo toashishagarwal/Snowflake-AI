@@ -128,7 +128,6 @@ select s,t, editdistance(s, t) from st;
 -----------------------------------------------------------------------
 -- Examples of FULL TEXT SEARCH 
 ------------------------------------------------------------------------
-
 SELECT SEARCH('king','KING');  -- TRUE
 SELECT SEARCH('5.1.33','32');  -- FALSE, since 32 is not there in param 1
 
@@ -136,4 +135,24 @@ SELECT SEARCH('King of Kalinga was Samrat Ashok','King and Queen'); -- TRUE, sin
 
 SELECT SEARCH('King of Kalinga was Samrat Ashok','King and Queen',SEARCH_MODE => 'AND'); -- FALSE, since we now forced to search using AND
 
+-----------------------------------------------------------------------
+-- Examples of FILTER over semi-structured JSON content
+-- Filters people over 50 years of age
+------------------------------------------------------------------------
+SELECT FILTER(
+  [
+    {'name':'Patrick', 'age': 50},
+    {'name':'Terry', 'age': 75},
+    {'name':'Dyna', 'age': 25},
+    {'name':'Ishwari', 'age': 32}
+  ],
+  a -> a:age >= 50) AS "People Over 50";
+
+-----------------------------------------------------------------------------------
+-- Example of FILTER over semi-structured JSON content
+-- Filters people over 50 years of age
+------------------------------------------------------------------------------------
+SELECT TRANSFORM([5, 10, 15], a INT -> a / 5) AS "Divide by 5"; -- Gives [1, 2, 3]
+
+SELECT TRANSFORM([5, 10, 3], a INT -> a / 5) AS "Divide by 5";  -- Gives [1, 2, 0.6]
 
