@@ -93,3 +93,34 @@ Table pune_customers limit 2;
 
 Table pune_customers BEFORE(OFFSET => -30)  -- Time travel queries
 
+------------------------------------------------------------------------------------------------------------------
+-- Example of JAROWINKLER_SIMILARITY
+--       Computes the similarity between two input strings. The function returns an integer between 0 and 100, 
+--       where 0 indicates no similarity and 100 indicates an exact match.
+------------------------------------------------------------------------------------------------------------------
+create or replace table st(s string, t string);
+insert into st values('apple','apple');
+insert into st values('apple','apple inc');
+insert into st values('apple','apples');
+insert into st values('big apple','apple');
+insert into st values('apple','small apple');
+
+table st;
+
+select s,t, jarowinkler_similarity(s, t) from st;
+
+------------------------------------------------------------------------------------------------------------------
+-- Example of EDITDISTANCE 
+--       Computes the Levenshtein distance between two input strings. It is the number of single-character 
+--       insertions, deletions, or substitutions needed to convert one string to another. 
+------------------------------------------------------------------------------------------------------------------
+create or replace table st(s string, t string);
+insert into st values('apple','apple');
+insert into st values('apple','apple inc');
+insert into st values('apple','apples');
+insert into st values('big apple','apple');
+insert into st values('apple','small apple');
+
+table st;
+
+select s,t, editdistance(s, t) from st;
