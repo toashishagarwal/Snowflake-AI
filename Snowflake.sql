@@ -4,6 +4,16 @@
 show grants to user AAGARWAL;
 
 ----------------------------------------
+-- Use a given role
+----------------------------------------
+USE ROLE <rolename>;
+
+----------------------------------------
+-- Use all secondary roles assigned to a user
+----------------------------------------
+USE SECONDARY ROLES ALL;
+
+----------------------------------------
 -- To get a list of databases
 ----------------------------------------
 SELECT * FROM information_schema.databases;
