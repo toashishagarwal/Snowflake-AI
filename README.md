@@ -33,4 +33,5 @@ Text2SQL chatbot takes plain text english query, transforms that into a snowflak
 # 3. Finetune LLM example
 This notebook demonstrates the finetuning of 'mistral-7b' LLM model on a synthentically generated IT support tickets data. The idea is to match the results obtained on the classification of the tickets via the expensive 'mistral-large' model. The finetuned model is then used to re-classify the IT tickets albeit this time with matching performance with low cost.
 
-
+# 4. RAG
+Retrieval-Augmented Generation (RAG) is a framework that combines information retrieval with generative language models. In simpler terms, it's an approach that helps AI generate more accurate and up-to-date text by incorporating relevant information from external sources. In this tutorial, we use the foundation model from llama (llama2-70b-chat) to query a synthetically generated data about ergonomics. It demonsrates the use of vectors & vector cosine similarity to achieve RAG. The end result is a prioritised list of documents that match the query in descending order of similarity score.
