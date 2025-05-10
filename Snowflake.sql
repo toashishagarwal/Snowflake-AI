@@ -171,3 +171,14 @@ SELECT TRANSFORM([5, 10, 15], a INT -> a / 5) AS "Divide by 5"; -- Gives [1, 2, 
 
 SELECT TRANSFORM([5, 10, 3], a INT -> a / 5) AS "Divide by 5";  -- Gives [1, 2, 0.6]
 
+-----------------------------------------------------------------------------------
+-- Create a file format with options
+-----------------------------------------------------------------------------------
+CREATE OR REPLACE FILE FORMAT my_csv
+  TYPE = CSV
+  PARSE_HEADER = TRUE
+  FIELD_OPTIONALLY_ENCLOSED_BY = '"'
+  ERROR_ON_COLUMN_COUNT_MISMATCH = FALSE
+  REPLACE_INVALID_CHARACTERS= TRUE
+  SKIP_BLANK_LINES = TRUE;
+
