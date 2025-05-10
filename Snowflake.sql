@@ -39,6 +39,11 @@ join stores st
 on   s.store_id = st.store_id;
 
 -------------------------------------------------------------------
+-- Create a STAGE
+-------------------------------------------------------------------
+Create or Replace Stage <STAGE_NAME>
+
+-------------------------------------------------------------------
 -- Add a file (models.zip) from local dir to STAGE-model_stage
 -------------------------------------------------------------------
 PUT file:///Users/aagarwal/Downloads/models.zip @model_stage AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
