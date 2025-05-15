@@ -9,7 +9,8 @@ After this, you need to unzip the file in Snowflake notebook's working directory
 Technologies: Snowflake Cortex, Python, Streamlit <br>
 Text2SQL chatbot takes plain text english query, transforms that into a snowflake-compatible SQL & returns results <br>
 
-# 2. Text2SQL AI chatbot (Semantic Model approach)
+# 2. SQL Genie 
+AI powered assistant for SQL queries Text2SQL AI chatbot (Semantic Model approach)
 Technologies: Snowflake Cortex, Python, Streamlit <br>
 Text2SQL chatbot takes plain text english query, transforms that into a snowflake-compatible SQL & returns results <br>
 
