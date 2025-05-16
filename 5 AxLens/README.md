@@ -18,7 +18,7 @@ AxLens is an AI-powered Streamlit chat application that queries curated news fro
 ✅ Insights from authoritative news sources  
 ✅ Intelligent semantic search using vector similarity  
 ✅ Scalable data pipelines via Snowflake internal stages  
-✅ Clean and interactive UI using Streamlit
+✅ Clean and interactive UI using Streamlit <br>
 ✅ Provision to use different LLM models 
 
 ---
