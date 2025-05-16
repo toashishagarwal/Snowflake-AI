@@ -91,3 +91,8 @@ AxLens combines the power of modern data architecture and LLMs to deliver a seam
 5. Run the streamlit app
 	```bash
 	streamlit run app.py
+
+ ---
+ ## Next Steps
+ 1. Automation of Data Ingestion:
+    Automate the web crawling & conversion to PDF. Auto load of the PDFs in Snowflake stage
