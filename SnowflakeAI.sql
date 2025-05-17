@@ -106,7 +106,30 @@ select SNOWFLAKE.CORTEX.COMPLETE(
         }
     ], {'guardrails': true}) as Response;
 
+---------------------------------------------------------------------------------------------
+--- EXAMPLE: Multi-Modal. How to analyse Images
+---------------------------------------------------------------------------------------------
+-- Step 1: Create an internal stage (You may choose to use external stage like S3 as well)
+CREATE OR REPLACE STAGE image_stage
+    DIRECTORY = ( ENABLE = true )
+    ENCRYPTION = ( TYPE = 'SNOWFLAKE_SSE' );
 
+-- Step 2: Upload the images to be analysed either via PUT command or Add Data option in UI
 
+-- Step 3: Verify the list of images in stage
+ls @image_stage;
+
+-- Step 4: Example 1: Analyse 2 display ads 
+SELECT SNOWFLAKE.CORTEX.COMPLETE('claude-3-5-sonnet',
+    PROMPT('Compare this image {0} to this image {1} and describe the ideal audience for each in two concise bullets no longer than 10 words',
+    TO_FILE('@image_stage', 'creative1.png'),
+    TO_FILE('@image_stage', 'creative2.png')
+));
+
+-- Step 4: Example 2: Analyse any other image. In this example I analyse boeing's stock chart from yahoo finance 
+SELECT SNOWFLAKE.CORTEX.COMPLETE('claude-3-5-sonnet',
+    'What led to the fall in boeing share price between Dec 2023 and March 2024.
+    Include all market-related, company-related, competition-related, security-related data. ',
+    TO_FILE('@image_stage', 'boeing.png'));
 
 
