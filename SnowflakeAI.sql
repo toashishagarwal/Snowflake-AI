@@ -132,4 +132,7 @@ SELECT SNOWFLAKE.CORTEX.COMPLETE('claude-3-5-sonnet',
     Include all market-related, company-related, competition-related, security-related data. ',
     TO_FILE('@image_stage', 'boeing.png'));
 
-
+-- Step 5: Analyse the image to find the cars & their colors
+SELECT SNOWFLAKE.CORTEX.COMPLETE('claude-3-5-sonnet',
+    'What are the number of cars. If any, of how many colors',
+    TO_FILE('@image_stage', 'cars.png'));
