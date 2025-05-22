@@ -182,3 +182,26 @@ CREATE OR REPLACE FILE FORMAT my_csv
   REPLACE_INVALID_CHARACTERS= TRUE
   SKIP_BLANK_LINES = TRUE;
 
+-----------------------------------------------------------------------------------
+-- Flow operator (aka Arrow operator) example
+-----------------------------------------------------------------------------------
+-- show specific cols from first sql query & order by specific col
+show warehouses 
+       ->> select "name", "state", "type", "size" from $1 order by "size";
+
+-- Find research tables ending with _keep
+show tables in database research 
+       ->> select * from $1 where "name" ilike '%_keep';
+
+-- Array of lowercase usersnames
+show users 
+       ->> select lower("name") as name from $1
+              ->> select array_agg(name) from $1;
+
+-- Get numeric column names from a table
+describe table moa_live.stage.ABMD_DATA_REPORTED_20250515
+       ->> select * from $1 where "type" ilike '%number%' 
+              ->> select "name", "type" from $1;
+
+
+
