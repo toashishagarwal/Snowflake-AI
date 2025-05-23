@@ -203,5 +203,7 @@ describe table moa_live.stage.ABMD_DATA_REPORTED_20250515
        ->> select * from $1 where "type" ilike '%number%' 
               ->> select "name", "type" from $1;
 
-
+-- Get total size of the all tables in given schema
+show tables in schema <DB Name>.<Schema Name>
+       ->> select sum("bytes") from $1;
 
