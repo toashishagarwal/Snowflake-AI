@@ -207,3 +207,8 @@ describe table moa_live.stage.ABMD_DATA_REPORTED_20250515
 show tables in schema <DB Name>.<Schema Name>
        ->> select sum("bytes") from $1;
 
+-- Chaining Create, Insert & Select
+CREATE TABLE table1 (col1 INT)
+->> INSERT INTO table1 VALUES (5)
+->> SELECT * FROM $1;
+
